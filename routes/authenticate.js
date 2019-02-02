@@ -5,13 +5,11 @@ const {userModel} = require('./../models/user.js');
 const {mongoose} = require('./../mongoose/mongoose-connect');
 
 router.post('/signup',(request,response)=>{
-    const user = _.pick(request.body,['userName','firstName','lastName','email','aadhar','phone'])
+    const user = _.pick(request.body,['userName','email','aadhar','phone'])
     console.log('inside');
 
     var newUser = new userModel({
         userName:user.userName,
-        firstName:user.firstName,
-        lastName:user.lastName,
         email:user.email,
         aadhar:user.aadhar,
         phone:user.phone
