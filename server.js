@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 var helmet = require('helmet');
 const path = require('path');
-var authenticationRouter = require('./routes/authenticate.js');
+var authentication = require('./routes/authenticate.js');
 var reportRouter = require('./routes/report.js');
 var searchRouter = require('./routes/search.js');
 // var cors = require('cors');
@@ -26,7 +26,7 @@ app.use((req, res, next) => {
          next();
       });
     
-app.use('/api/auth',authenticationRouter);
+app.use('/api/auth',authentication[0]);
 app.use('/api/report',reportRouter);
 app.use('/api/search',searchRouter);
 app.use('/*', express.static(path.join(__dirname, 'public')));

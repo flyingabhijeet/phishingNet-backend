@@ -3,10 +3,15 @@ const router = express.Router();
 const _ = require('lodash');
 const {reportModel} = require('../models/report.js');
 const {mongoose} = require('../mongoose/mongoose-connect');
+const id = require('./authenticate.js');
+
+console.log(id[1]);
 
 router.post('/',(request,response)=>{
+    // console.log(id);
     const report = _.pick(request.body,['companyName','companyLink','report']);
     report.companyName = report.companyName.toLowerCase();
+    // report.report.reportedBy = id[1];
     console.log('saved company name is ',report.companyName);
     
     var newReport = new reportModel(report);
@@ -33,9 +38,23 @@ router.post('/',(request,response)=>{
     console.log(newReport);
 });
 
+router.get('/:id',(request,response)=>{
+    reportModel.findById(id).then((foundReport)=>{
+        if(!foundReport){
+           response.status(404).send('No such report found!');             
+        }else{
+            response.status(200).send(foundReport);
+        }
+    }).catch((e)=>{
+        console.log('Error in getting report',e);
+        response.status(400).send('Error getting report');
+    });
+});
+
 router.patch('/:id',(request,response)=>{
 
     const myReport = _.pick(request.body,['report']);
+    // report.report.reportedBy = id[1];
 
     reportModel.findByIdAndUpdate(request.params.id).then((reportFound)=>{
         if(reportFound){
