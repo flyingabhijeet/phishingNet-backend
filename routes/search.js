@@ -13,6 +13,14 @@ router.get('/:word',(request,response)=>{
         } 
     }).then((foundReport)=>{
         console.log(foundReport);
+        if(foundReport.length==0){
+            response.status(404).send('No Such Report Exists!');
+        }else{
+            response.status(200).send(foundReport);
+        }
+    }).catch((e)=>{
+        console.log(e);
+        response.status(400).send('Error Searching Reports');
     });
 })
 
