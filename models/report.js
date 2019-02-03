@@ -7,6 +7,9 @@ var reportSchema = new mongoose.Schema({
     companyLink:{
         type:String
     },
+    description:{
+        type:String
+    },
     report:[{
         category:{
             type:String
@@ -18,9 +21,6 @@ var reportSchema = new mongoose.Schema({
             type:String
         }
     }],
-    fraud:{
-        type:Boolean
-    },
     date:{
         type:String,
         default:new Date()
