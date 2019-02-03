@@ -20,7 +20,8 @@ var userSchema = new mongoose.Schema({
         type:Number
     },
     loggedIn:{
-        type:Boolean
+        type:Boolean,
+        defualt:true
     }
 });
 
